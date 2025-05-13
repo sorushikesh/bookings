@@ -1,5 +1,12 @@
 fastapi==0.115.12
 uvicorn
+sqlalchemy
+pydantic
+pydantic[email]
+psycopg2-binary
+python-dotenv
+asyncpg
+alembic
 
 black>=24.3.0
 isort>=5.12.0
