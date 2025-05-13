@@ -105,7 +105,7 @@ uvicorn main:app --reload
 
 ---
 
-## ✍️ Author
+## Author
 
 **Rushikesh Sonawane (sorushikesh07@gmail.com)**
 *Developer exploring modern Python backends with FastAPI*
