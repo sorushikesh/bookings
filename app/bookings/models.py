@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Date
-from datetime import datetime
+from sqlalchemy.sql import func
 from app.db.base_class import Base
-
 
 class Booking(Base):
     __tablename__ = "bookings"
@@ -18,4 +17,4 @@ class Booking(Base):
     checkin_date = Column(Date, nullable=False)
     checkout_date = Column(Date, nullable=False)
     status = Column(String, default="pending")
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, server_default=func.now())
