@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 import logging
 
 from app.bookings.schemas import BookingCreate, BookingOut
@@ -11,16 +11,16 @@ router = APIRouter(prefix="/v1/bookings", tags=["Bookings"])
 
 
 class BookingHandler:
-    def __init__(self, db: AsyncSession = Depends(get_db)):
+    def __init__(self, db: Session = Depends(get_db)):
         self.db = db
 
-    async def create_booking(self, booking: BookingCreate) -> BookingOut:
-        logger.info(f"Creating booking for user: {booking.username}, hotel: {booking.hotel_name}")
-        return await bookingservice.create_booking(self.db, booking)
+    def create_booking(self, booking: BookingCreate) -> BookingOut:
+        logger.info(
+            f"Creating booking for user: {booking.username}, hotel: {booking.hotel_name}"
+        )
+        return bookingservice.create_booking(self.db, booking)
 
 
-# Inject routes using dependency on the handler class
 @router.post("/", response_model=BookingOut)
-async def create_booking(booking: BookingCreate, handler: BookingHandler = Depends()):
-    return await handler.create_booking(booking)
-
+def create_booking(booking: BookingCreate, handler: BookingHandler = Depends()):
+    return handler.create_booking(booking)
