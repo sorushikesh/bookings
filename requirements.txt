@@ -1,13 +1,21 @@
 fastapi==0.115.12
-uvicorn
-sqlalchemy
-pydantic
-pydantic[email]
+uvicorn[standard]
+
+# Sync PostgreSQL support for FastAPI
 psycopg2-binary
+
+# SQLAlchemy with sync support
+sqlalchemy
+
+# Pydantic v2
+pydantic>=2.0
+pydantic[email]
+
+# Environment variable support
 python-dotenv
-asyncpg
+
+# Database migration tool
 alembic
 
+# Code formatter
 black>=24.3.0
-isort>=5.12.0
-flake8>=6.1.0
